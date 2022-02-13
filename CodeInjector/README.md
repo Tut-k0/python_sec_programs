@@ -1,6 +1,7 @@
 # Code Injector
 Idea here is to edit requests/responses, replace download requests,
-and inject html and javascript.
+and inject html and javascript. This can be used in parallel with
+the beef framework, or any other javascript attack.
 
 Requires being a MiTM machine.
 
